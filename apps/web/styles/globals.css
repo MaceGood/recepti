@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --soft-pink: #d77fa1;
+  --soft-purple: #baabda;
+  --soft-blue: #d6e5fa;
+  --soft-white: #fff9f9;
+}
+
+html {
+  background-color: var(--soft-pink);
+  max-width: 1536px;
+  margin: 0 auto;
+}
