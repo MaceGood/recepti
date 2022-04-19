@@ -1,17 +1,15 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { MenuAlt3Icon } from "@heroicons/react/solid";
-import { Button } from "../Button";
-
-type Props = {
-  onClick: () => void;
-};
+import { useRouter } from "next/router";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const NavbarMenu: React.FC<Props> = ({ onClick }) => {
+const NavbarMenu: React.FC = () => {
+  const router = useRouter();
+
   return (
     <Menu as="div" className="relative inline-block text-left ml-8 z-50">
       <div>
@@ -34,7 +32,7 @@ const NavbarMenu: React.FC<Props> = ({ onClick }) => {
             <Menu.Item>
               <button
                 className={classNames(
-                  "hover:bg-gray-100 hover:text-gray-900 text-gray-700 w-full flex items-center text-left px-4 py-2 text-base"
+                  "hover:bg-soft-white hover:text-soft-purple hover:rounded-md w-full flex items-center text-left px-4 py-2 text-base"
                 )}
               >
                 Home
@@ -43,14 +41,19 @@ const NavbarMenu: React.FC<Props> = ({ onClick }) => {
             <Menu.Item>
               <button
                 className={classNames(
-                  "hover:bg-gray-100 hover:text-gray-900 text-gray-700 w-full flex items-center text-left px-4 py-2 text-base"
+                  "hover:bg-soft-white hover:text-soft-purple hover:rounded-md w-full flex items-center text-left px-4 py-2 text-base"
                 )}
               >
                 Recipes
               </button>
             </Menu.Item>
             <Menu.Item>
-              <Button text="Login" onClick={onClick} />
+              <button
+                className="text-soft-purple bg-soft-white rounded-lg px-10 py-2 border hover:text-soft-white hover:bg-soft-purple hover:border-soft-white"
+                onClick={() => router.push("/login")}
+              >
+                Login
+              </button>
             </Menu.Item>
           </div>
         </Menu.Items>

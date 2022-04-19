@@ -14,3 +14,18 @@ html {
   max-width: 1536px;
   margin: 0 auto;
 }
+
+#nprogress .bar {
+  background: var(--soft-blue) !important;
+}
+
+#nprogress .peg {
+  display: none;
+  box-shadow: 0 0 10px var(--soft-blue), 0 0 5px var(--soft-blue);
+}
+
+#nprogress .spinner-icon {
+  display: none;
+  border-top-color: var(--soft-blue) !important;
+  border-left-color: var(--soft-blue) !important;
+}

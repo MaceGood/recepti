@@ -14,11 +14,11 @@ export const Home: React.FC<Props> = ({}) => {
             <p>Cooking With</p>
             <p>Popular Recipes.</p>
           </div>
-          <Button text="Explore Menu" className="mt-6 text-2xl" />
+          <Button text="Explore Recipes" className="mt-6 text-2xl" />
         </div>
         <Image
           src="/explore-menu.svg"
-          alt="Explore Menu"
+          alt="Explore Recipes"
           width={450}
           height={450}
         />
@@ -27,7 +27,7 @@ export const Home: React.FC<Props> = ({}) => {
       <div className="md:flex md:flex-row flex flex-col  w-full items-center justify-evenly  my-12">
         <Image
           src="/healthy.svg"
-          alt="Explore Healthy Menu"
+          alt="Explore Healthy Recipes"
           width={450}
           height={450}
         />
@@ -36,7 +36,7 @@ export const Home: React.FC<Props> = ({}) => {
             <p>Cook Healthy.</p>
             <p>Stay Healthy.</p>
           </div>
-          <Button text="Explore Healthy Menu" className="mt-6 text-2xl" />
+          <Button text="Explore Healthy Recipes" className="mt-6 text-2xl" />
         </div>
       </div>
 
