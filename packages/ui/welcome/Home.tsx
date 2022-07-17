@@ -1,10 +1,12 @@
 import React from "react";
 import { Button } from "../Button";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 type Props = {};
 
 export const Home: React.FC<Props> = ({}) => {
+  const router = useRouter();
   return (
     <div>
       <div className="md:flex md:flex-row flex flex-col-reverse w-full items-center justify-evenly my-12">
@@ -14,7 +16,11 @@ export const Home: React.FC<Props> = ({}) => {
             <p>Cooking With</p>
             <p>Popular Recipes.</p>
           </div>
-          <Button text="Explore Recipes" className="mt-6 text-2xl" />
+          <Button
+            text="Explore Recipes"
+            className="mt-6 text-2xl"
+            onClick={() => router.push("/recipes")}
+          />
         </div>
         <Image
           src="/explore-menu.svg"
@@ -24,7 +30,7 @@ export const Home: React.FC<Props> = ({}) => {
         />
       </div>
 
-      <div className="md:flex md:flex-row flex flex-col  w-full items-center justify-evenly  my-12">
+      <div className="md:flex md:flex-row flex flex-col w-full items-center justify-evenly  my-12">
         <Image
           src="/healthy.svg"
           alt="Explore Healthy Recipes"

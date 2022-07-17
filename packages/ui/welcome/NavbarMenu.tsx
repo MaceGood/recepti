@@ -2,6 +2,8 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { MenuAlt3Icon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -9,11 +11,12 @@ function classNames(...classes) {
 
 const NavbarMenu: React.FC = () => {
   const router = useRouter();
+  const { data: session } = useSession();
 
   return (
     <Menu as="div" className="relative inline-block text-left ml-8 z-50">
       <div>
-        <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 ">
+        <Menu.Button className="inline-flex justify-center w-full rounded-md border px-4 py-2 text-sm font-medium  ">
           <MenuAlt3Icon className="h-10 w-10 cursor-pointer" />
         </Menu.Button>
       </div>
@@ -27,32 +30,62 @@ const NavbarMenu: React.FC = () => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none bg-soft-purple p-5">
+        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg ring-1 ring-dark ring-opacity-5 focus:outline-none bg-light-pink p-5 border border-dark">
           <div className="py-1">
-            <Menu.Item>
-              <button
-                className={classNames(
-                  "hover:bg-soft-white hover:text-soft-purple hover:rounded-md w-full flex items-center text-left px-4 py-2 text-base"
+            {!session?.user ? (
+              <>
+                {router.pathname !== "/recipes" && (
+                  <Menu.Item>
+                    <button
+                      className={classNames(
+                        "hover:bg-soft-white text-dark hover:rounded-md w-full flex items-center text-left px-4 py-2 text-base"
+                      )}
+                      onClick={() => router.push("/recipes")}
+                    >
+                      Recipes
+                    </button>
+                  </Menu.Item>
                 )}
-              >
-                Home
-              </button>
-            </Menu.Item>
-            <Menu.Item>
-              <button
-                className={classNames(
-                  "hover:bg-soft-white hover:text-soft-purple hover:rounded-md w-full flex items-center text-left px-4 py-2 text-base"
+              </>
+            ) : (
+              <>
+                <div className="flex items-center w-full text-left px-4 py-2 text-base md:hidden">
+                  <Image
+                    src={session?.user?.image}
+                    alt={session?.user?.name}
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
+                  <p className="text-base ml-4 cursor-default text-dark">
+                    {session?.user?.name}
+                  </p>
+                </div>
+
+                {router.pathname !== "/recipes" && (
+                  <Menu.Item>
+                    <button
+                      className={classNames(
+                        "hover:bg-soft-white text-dark hover:rounded-md w-full flex items-center text-left px-4 py-2 text-base"
+                      )}
+                      onClick={() => router.push("/recipes")}
+                    >
+                      Recipes
+                    </button>
+                  </Menu.Item>
                 )}
-              >
-                Recipes
-              </button>
-            </Menu.Item>
+              </>
+            )}
+
             <Menu.Item>
               <button
-                className="text-soft-purple bg-soft-white rounded-lg px-10 py-2 border hover:text-soft-white hover:bg-soft-purple hover:border-soft-white"
-                onClick={() => router.push("/login")}
+                className="text-dark bg-light-pink  hover:text-soft-white hover:bg-dark hover:border-soft-white
+                  rounded-lg px-10 py-2 border"
+                onClick={() =>
+                  session?.user ? signOut() : router.push("/login")
+                }
               >
-                Login
+                {session?.user ? "Sign out" : "Login"}
               </button>
             </Menu.Item>
           </div>

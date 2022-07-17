@@ -1,0 +1,11 @@
+mutation CreateRecipe($options: CreateRecipeOptions!) {
+  createRecipe(options: $options) {
+    id
+    createdBy
+    name
+    category
+    image
+    recipe
+    timeToPrepare
+  }
+}

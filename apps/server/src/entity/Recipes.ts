@@ -3,16 +3,20 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  CreateDateColumn,
   BaseEntity,
+  OneToOne,
 } from "typeorm";
 
 @ObjectType()
 @Entity()
-export class User extends BaseEntity {
+export class Recipes extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
   id: number;
+
+  // @Field()
+  // @OneToOne(() => Number)
+  // createdBy: number;
 
   @Field(() => String)
   @Column()
@@ -20,12 +24,17 @@ export class User extends BaseEntity {
 
   @Field(() => String)
   @Column()
-  email: string;
-
-  @Column()
-  password: string;
+  category: string;
 
   @Field(() => String)
-  @CreateDateColumn()
-  createdAt: Date;
+  @Column()
+  timeToPrepare: string;
+
+  @Field(() => String)
+  @Column()
+  recipe: string;
+
+  @Field(() => String)
+  @Column()
+  image: string;
 }

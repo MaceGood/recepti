@@ -12,9 +12,11 @@ import {
   useSession,
 } from "next-auth/react";
 import { BuiltInProviderType } from "next-auth/providers";
+import Menu from "./recipes";
 
 const Login: NextPage = () => {
   const router = useRouter();
+  const { data: session } = useSession();
   const [providers, setproviders] = useState<Record<
     LiteralUnion<BuiltInProviderType, string>,
     ClientSafeProvider
@@ -27,6 +29,11 @@ const Login: NextPage = () => {
     };
     setTheProviders();
   }, []);
+
+  if (session?.user) {
+    router.push("/recipes");
+    <Menu />;
+  }
 
   return (
     <div className="w-full min-h-screen max-w-screen-2xl mx-auto bg-soft-pink px-10 py-6 text-soft-white flex flex-col justify-center text-center">
@@ -69,9 +76,11 @@ const Login: NextPage = () => {
         </div>
 
         <div className="flex items-center">
-          <h1 className="cursor-pointer mr-8 hover:text-soft-blue">
-            Report a bug
-          </h1>
+          <a href="https://github.com/MaceGood/recepti/issues" target="_blank">
+            <h1 className="cursor-pointer mr-8 hover:text-dark">
+              Report a bug
+            </h1>
+          </a>
 
           <a href="https://github.com/MaceGood/recipes-app" target="_blank">
             <Image

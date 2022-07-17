@@ -13,7 +13,7 @@
     "babel-loader": "^8.2.4",
     "config": "*",
     "postcss": "^8.4.12",
-    "tailwindcss": "^3.0.23",
+    "tailwindcss": "^3.0.24",
     "tsconfig": "*",
     "typescript": "^4.5.3",
     "yarn": "^1.22.18"
@@ -21,6 +21,7 @@
   "dependencies": {
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
-    "next-auth": "^4.3.2"
+    "next-auth": "^4.3.2",
+    "react-dropzone": "^14.2.1"
   }
 }

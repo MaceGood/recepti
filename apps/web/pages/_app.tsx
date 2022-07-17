@@ -6,8 +6,14 @@ import "nprogress/nprogress.css";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { SessionProvider } from "next-auth/react";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+const client = new ApolloClient({
+  uri: "http://localhost:4000/graphql",
+  cache: new InMemoryCache(),
+});
+
+function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const router = useRouter();
 
   useEffect(() => {
@@ -30,10 +36,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   }, [router]);
 
   return (
-    <SessionProvider session={session}>
-      <Component {...pageProps} />
-    </SessionProvider>
+    <ApolloProvider client={client}>
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
+    </ApolloProvider>
   );
 }
 
-export default MyApp;
+export default App;

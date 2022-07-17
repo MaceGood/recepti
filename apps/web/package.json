@@ -6,9 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "next codegon": "graphql-codegen --config codegen.yml",
+    "gen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.4",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@graphql-codegen/cli": "^2.6.2",
+    "@mui/material": "^5.6.3",
     "@next-auth/typeorm-legacy-adapter": "^1.0.3",
     "@types/nprogress": "^0.2.0",
     "lodash": "^4.17.21",
@@ -24,6 +31,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/typescript": "2.4.11",
+    "@graphql-codegen/typescript-operations": "2.4.0",
+    "@graphql-codegen/typescript-react-apollo": "3.2.14",
     "@types/node": "^17.0.12",
     "@types/react": "17.0.37",
     "autoprefixer": "^10.4.4",
@@ -31,9 +43,10 @@
     "config": "*",
     "eslint": "7.32.0",
     "eslint-plugin-storybook": "^0.5.7",
+    "graphql": "^16.5.0",
     "next-transpile-modules": "9.0.0",
     "postcss": "^8.4.12",
-    "tailwindcss": "^3.0.23",
+    "tailwindcss": "^3.0.24",
     "tsconfig": "*",
     "typescript": "^4.5.3"
   }

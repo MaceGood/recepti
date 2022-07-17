@@ -1,9 +1,9 @@
 import "reflect-metadata";
 import express from "express";
-import { AppDataSource } from "./data-source";
+import { AppDataSource } from "./lib/database";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
-import { UserResolver } from "./resolvers/user";
+import { RecipeResolver } from "./resolvers/Recipes";
 
 async function main() {
   const app = express();
@@ -13,13 +13,18 @@ async function main() {
 
   const server = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver],
+      resolvers: [RecipeResolver],
       validate: false,
     }),
   });
 
   await server.start();
-  server.applyMiddleware({ app });
+
+  const corsOptions = {
+    origin: ["http://localhost:3000", "https://studio.apollographql.com"],
+  };
+
+  server.applyMiddleware({ app, cors: corsOptions });
 
   app.listen(port, () =>
     console.log(
